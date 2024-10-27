@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    username: Ayush
+    password: Ayush@3344
+    url: jdbc:mysql://localhost:3306/blogs
+    jap:
+      hibernate:
+        ddl-auto: update
+        show-sql: true
+        properties:
+          hibernate:
+            format_sql: true
