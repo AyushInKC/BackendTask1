@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
-
 @RestController
 @RequestMapping("/api/v1/movie")
 public class MovieController {
@@ -37,6 +36,28 @@ public class MovieController {
     @GetMapping("/all")
     public ResponseEntity<List<MovieDTO>> getAllMovies(){
      return ResponseEntity.ok(movieservice.getAllMovies());
+    }
+
+    @PutMapping("update/{movieId}")
+    public ResponseEntity<MovieDTO> updateMovieHandler(@PathVariable Integer movieId,@RequestPart MultipartFile file , String movieDtoObj){
+        if(file.isEmpty()){
+            file=null;
+        }
+        MovieDTO movieDto= null;
+        try {
+            movieDto = convertToMovieDTO(movieDtoObj);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            return ResponseEntity.ok(movieservice.updateMovie(movieId, movieDto,file));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @DeleteMapping("/delete/{movieId}")
+    public ResponseEntity<String> deleteMovieHandler(@PathVariable Integer movieId){
+            return ResponseEntity.ok(movieservice.deleteMovie(movieId));
     }
     private MovieDTO convertToMovieDTO(String movieDtoObj) throws JsonProcessingException {
         ObjectMapper objectMapper=new ObjectMapper();

@@ -25,7 +25,7 @@ public class FileServiceImplement implements FileService{
         }
 
         //copy the file path and if file path already exists then replace it by the new file path
-        Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(file.getInputStream(), Paths.get(filePath));
         return fileName;
     }
     @Override
