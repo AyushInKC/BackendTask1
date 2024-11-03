@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @Service
-public class FileServiceImplement implements fileService{
+public class FileServiceImplement implements FileService{
     @Override
     public String uploadFile(String path, MultipartFile file) throws IOException {
         //to get the file name

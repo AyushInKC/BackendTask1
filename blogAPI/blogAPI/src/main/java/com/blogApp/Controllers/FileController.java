@@ -1,5 +1,6 @@
 package com.blogApp.Controllers;
-import com.blogApp.Service.fileService;
+import com.blogApp.Service.FileService;
+import com.blogApp.Service.FileService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -8,19 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 @RestController
 @RequestMapping("/file/")
-public class fileController {
+public class FileController {
 
-  private final fileService fileServices;
+  private final FileService fileServices;
   @Value("${project.poster}")
   private String path;
 
-  public fileController(fileService fileService){
+  public FileController(FileService fileService){
     this.fileServices = fileService;
   }
 
@@ -28,6 +29,10 @@ public class fileController {
   public ResponseEntity<String> uploadFileHandler(@RequestPart MultipartFile file) throws IOException {
     String uploadedFileName = fileServices.uploadFile(path, file);
     return ResponseEntity.ok("File Uploaded: " + uploadedFileName);
+  }
+  @GetMapping("/sample")
+  public String random(){
+    return "Hello Welcome to the Application";
   }
 
   @GetMapping("/{fileName}")
