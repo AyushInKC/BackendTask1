@@ -10,5 +10,5 @@ public interface movieService {
    MovieDTO addMovie(MovieDTO moviedto, MultipartFile file) throws IOException;
    MovieDTO getMovie(Integer movieId);
    List<MovieDTO> getAllMovies();
-//    MovieDTO updateMovie(Integer movieId, MovieDTO movieDto, MultipartFile file) throws IOException;
+   MovieDTO updateMovie(Integer movieId, MovieDTO movieDto, MultipartFile file) throws IOException;
 }

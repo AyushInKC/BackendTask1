@@ -8,12 +8,11 @@ import org.hibernate.internal.util.MutableLong;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/movie")
 public class MovieController {
@@ -28,6 +27,16 @@ public class MovieController {
         MovieDTO dto=convertToMovieDTO(movieDto);
 
     return new ResponseEntity<>(movieservice.addMovie(dto,file), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{movieId}")
+    public ResponseEntity<MovieDTO> getMovieHandler(@PathVariable Integer movieId){
+        return ResponseEntity.ok(movieservice.getMovie(movieId));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<MovieDTO>> getAllMovies(){
+     return ResponseEntity.ok(movieservice.getAllMovies());
     }
     private MovieDTO convertToMovieDTO(String movieDtoObj) throws JsonProcessingException {
         ObjectMapper objectMapper=new ObjectMapper();
