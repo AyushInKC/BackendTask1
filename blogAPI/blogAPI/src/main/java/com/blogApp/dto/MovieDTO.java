@@ -1,36 +1,35 @@
 package com.blogApp.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
-@Entity
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 public class MovieDTO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer movieId;
 
-
-    @NotBlank(message = "Please provide the Movie Title")
+    @NotBlank(message = "Please provide movie's title!")
     private String title;
 
-
-    @NotBlank(message = "Please provide the Movie Director")
+    @NotBlank(message = "Please provide movie's director!")
     private String director;
 
-    @NotBlank(message = "Please provide the Movie Studio")
+    @NotBlank(message = "Please provide movie's studio!")
     private String studio;
+
     private Set<String> movieCast;
+
     private Integer releaseYear;
-    @NotBlank(message = "Please provide the Movie Poster")
+
+    @NotBlank(message = "Please provide movie's poster!")
     private String poster;
-    @NotBlank(message = "Please provide the poster's URL")
+
+    @NotBlank(message = "Please provide poster's url!")
     private String posterUrl;
 }
