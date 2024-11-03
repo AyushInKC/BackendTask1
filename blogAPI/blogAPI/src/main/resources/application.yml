@@ -12,7 +12,7 @@ spring:
         format_sql: true
 
 project:
-  poster: src/main/resources/static/posters/
+  poster: src/main/java/resources/static/
 
 
 
@@ -21,3 +21,4 @@ base:
 
 server:
   port: 8081
+
