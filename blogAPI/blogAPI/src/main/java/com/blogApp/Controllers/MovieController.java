@@ -1,6 +1,7 @@
 package com.blogApp.Controllers;
 import com.blogApp.Service.movieService;
 import com.blogApp.dto.MovieDTO;
+import com.blogApp.exceptions.EmptyFileException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,9 +9,11 @@ import org.hibernate.internal.util.MutableLong;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.util.EmptyStackException;
 import java.util.List;
 @RestController
 @RequestMapping("/api/v1/movie")
@@ -21,8 +24,16 @@ public class MovieController {
         this.movieservice = movieservice;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/add-movie")
     public ResponseEntity<MovieDTO> addMovieHandler(@RequestPart MultipartFile file,@RequestPart String movieDto) throws IOException {
+        if(file.isEmpty()){
+            try {
+                throw new EmptyFileException("File is empty! Please provide a different file");
+            } catch (EmptyFileException e) {
+                throw new RuntimeException(e);
+            }
+        }
         MovieDTO dto=convertToMovieDTO(movieDto);
 
     return new ResponseEntity<>(movieservice.addMovie(dto,file), HttpStatus.CREATED);
