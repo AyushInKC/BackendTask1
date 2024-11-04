@@ -33,9 +33,9 @@ public class AuthService {
 
         User savedUser = userRepository.save(user);
 
-        var accessToken = jwtService.generateToken(savedUser);
+    var accessToken = jwtService.generateToken(savedUser);
 
-        var refreshToken = refreshTokenService.createRefreshToken(savedUser.getEmail());
+    var refreshToken = refreshTokenService.createRefreshToken(savedUser.getEmail());
 
         return AuthResponse.builder()
                 .accessToken(accessToken)

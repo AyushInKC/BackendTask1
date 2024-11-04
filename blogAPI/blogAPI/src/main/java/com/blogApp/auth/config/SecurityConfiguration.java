@@ -27,13 +27,13 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/register", "/forgotPassword/**").permitAll()
+                        .requestMatchers("/api/v1/auth/**", "/forgotPassword/**")
+                        .permitAll()
                         .anyRequest()
                         .authenticated())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider);
-//                .addFilterBefore(authFilterService, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
