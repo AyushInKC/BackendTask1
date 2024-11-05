@@ -36,7 +36,7 @@ public class AuthService {
         User savedUser = userRepository.save(user);
         System.out.println("Saved User:- "+savedUser);
     var accessToken = jwtService.generateToken(savedUser);
-        System.out.println("Access Token:- "+accessToken);
+        System.out.println(accessToken);
     var refreshToken = refreshTokenService.createRefreshToken(savedUser.getEmail());
 
         System.out.println("Refresh Token:- "+refreshToken);
