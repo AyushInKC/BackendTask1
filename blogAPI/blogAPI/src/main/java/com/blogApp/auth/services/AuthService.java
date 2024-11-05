@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLOutput;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -30,12 +32,14 @@ public class AuthService {
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .role(UserRole.USER)
                 .build();
-
+        System.out.println("called1");
         User savedUser = userRepository.save(user);
-
+        System.out.println("Saved User:- "+savedUser);
     var accessToken = jwtService.generateToken(savedUser);
-
+        System.out.println("Access Token:- "+accessToken);
     var refreshToken = refreshTokenService.createRefreshToken(savedUser.getEmail());
+
+        System.out.println("Refresh Token:- "+refreshToken);
 
         return AuthResponse.builder()
                 .accessToken(accessToken)
