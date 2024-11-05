@@ -32,14 +32,14 @@ public class AuthService {
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .role(UserRole.USER)
                 .build();
-        System.out.println("called1");
+//        System.out.println("called1");
         User savedUser = userRepository.save(user);
-        System.out.println("Saved User:- "+savedUser);
+//        System.out.println("Saved User:- "+savedUser);
     var accessToken = jwtService.generateToken(savedUser);
-        System.out.println(accessToken);
+//        System.out.println(accessToken);
     var refreshToken = refreshTokenService.createRefreshToken(savedUser.getEmail());
 
-        System.out.println("Refresh Token:- "+refreshToken);
+//        System.out.println("Refresh Token:- "+refreshToken);
 
         return AuthResponse.builder()
                 .accessToken(accessToken)
