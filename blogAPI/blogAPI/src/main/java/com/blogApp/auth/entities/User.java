@@ -51,15 +51,16 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    private boolean isEnabled=true;
-    private boolean isAccountNonExpired=true;
-    private boolean isAccountNonLocked=true;
-    private boolean isCredentialsNonExpired=true;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
+
+    private boolean isEnabled=true;
+    private boolean isAccountNonExpired=true;
+    private boolean isAccountNonLocked=true;
+    private boolean isCredentialsNonExpired=true;
     @Override
     public String getPassword() {
         return password;

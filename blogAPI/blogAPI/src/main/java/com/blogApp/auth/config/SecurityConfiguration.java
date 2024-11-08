@@ -33,7 +33,8 @@ public class SecurityConfiguration {
                         .authenticated())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider);
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(authFilterService, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
